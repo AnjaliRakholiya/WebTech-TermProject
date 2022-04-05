@@ -15,6 +15,8 @@ var database = require('./config/database');
 var bodyParser = require('body-parser');         // pull information from HTML POST (express4)
 var request = require('request');
 const exphbs = require('express-handlebars');
+const gtts = require('gtts')
+const fs = require("fs");
 var port     = process.env.PORT || 8000;
 
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
@@ -203,6 +205,56 @@ app.post('/app/insert-a-book', function (req, res) {
 		res.render('index', { title: 'Books'});
 	});
 
+});
+
+app.get('/app/audio/:book_id', function(req, res) {
+	let id = req.params.book_id;
+	Book.findById(id, function(err, book) {
+		if (err)
+			res.send(err);
+		else{
+			var data = {
+				title : book.title,
+				thumbnailUrl : book.thumbnailUrl,
+				shortDescription : book.shortDescription,
+				longDescription : book.longDescription,
+				authors : [
+					book.author_0,
+					book.author_1,
+					book.author_2,
+					book.author_3,
+					book.author_4
+				]
+			}
+			console.log("Data while rendering = "+data.authors);
+			//console.log("Data = "+data.shortDescription);
+			res.render('audioBook', { title: 'Books', data: data });	
+		}
+	});
+});
+
+app.post('/app/download', function(req, res) {
+	//console.log("Langauge : " + req.body.langauge);
+	//console.log("Long Description : " + req.body.longDescription);
+	var title = req.body.title;
+	var language = req.body.langauge;
+	var text = req.body.longDescription;
+	outputFilePath = Date.now() +"_"+ title+ "_audioBook.mp3"
+  	var voice = new gtts(text,language.toString())
+  	voice.save(outputFilePath,function(err,result){
+	  if(err){
+		fs.unlinkSync(outputFilePath)
+		res.send("Unable to convert to audio")
+	  }
+	  res.download(outputFilePath,(err) => {
+		if(err){
+		  fs.unlinkSync(outputFilePath)
+		  res.send("Unable to download the file")
+		}
+  
+		fs.unlinkSync(outputFilePath)
+	  });
+	});
 });
 
 app.listen(port);

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        <meta charset="utf-8">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <nav class="font-sans flex flex-col text-center content-center sm:flex-row sm:text-left sm:justify-between py-2 px-6 bg-white shadow sm:items-baseline w-full">
+            <div class="mb-2 sm:mb-0 inner">
+                <a href="/" class="text-2xl no-underline text-grey-darkest hover:text-blue-dark font-sans font-bold">Web Technologies III</a><br>
+                <span class="text-xs text-grey-dark">Term Project</span>
+                <span class="text-xs text-grey-dark">Group 9</span>
+            </div>
+
+            <div class="sm:mb-0 self-center">
+                <div class="h-10" style="display: table-cell, vertical-align: middle;">
+                    <a href="/app/show-all-books" class="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">Books</a>
+                    <a href="/app/insert-a-book" class="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">AddBooks</a>
+                    <input id="buttonId" type="submit" class="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2" value="Log In">
+                </div>
+            </div>
+        </nav>
+        {{{body}}}
+    </body>
+</html>

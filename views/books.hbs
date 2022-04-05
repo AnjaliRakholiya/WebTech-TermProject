@@ -1,0 +1,44 @@
+<div style="padding-left: 17%;" class="container flex justify-center mx-auto">
+    <div class="flex flex-col">
+        <div class="w-full">
+            <div class="border-b border-gray-200 shadow">
+                <table>
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-2 text-xs text-gray-500">ID</th>
+                            <th class="px-6 py-2 text-xs text-gray-500">Title</th>
+                            <th class="px-6 py-2 text-xs text-gray-500">ISBN</th>
+                            <th class="px-6 py-2 text-xs text-gray-500">Page Count</th>
+                            <th class="px-6 py-2 text-xs text-gray-500">Published Date</th>
+                            <th class="px-6 py-2 text-xs text-gray-500">Thumbnail</th>
+                            <th class="px-6 py-2 text-xs text-gray-500">Short Description</th>
+                            <th class="px-6 py-2 text-xs text-gray-500">Status</th>
+                            <th class="px-6 py-2 text-xs text-gray-500">Categories</th>
+                            <th class="px-6 py-2 text-xs text-gray-500">Author</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        {{!-- if, helper function used. --}}
+                        {{#if data}}
+                            {{!-- each, helper function used. --}}
+                            {{#each data}}
+                                <tr class="">
+                                    <td>{{this._id}}</td>
+                                    <td class="px-6 py-4">{{this.title}}</td>
+                                    <td class="px-6 py-4">{{this.isbn}}</td>
+                                    <td class="px-6 py-4">{{this.pageCount}}</td>
+                                    <td class="px-6 py-4">{{this.publishedDate.$date}}</td>
+                                    <td class="px-6 py-4"><img width="100px" height="100px" src="{{this.thumbnailUrl}}"></img></td>
+                                    <td class="px-6 py-4">{{this.shortDescription}}</td>
+                                    <td class="px-6 py-4">{{this.status}}</td>
+                                    <td class="px-6 py-4">{{this.authors}}</td>
+                                    <td class="px-6 py-4">{{this.categories}}</td>
+                                </tr>
+                            {{/each}}
+                        {{/if}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -56,7 +56,7 @@ app.get('/api/books/:book_id', function(req, res) {
 		res.json(book);
 	});
  
-});
+}); 
 
 // create book and send back all books after creation
 app.post('/api/books', function(req, res) {
